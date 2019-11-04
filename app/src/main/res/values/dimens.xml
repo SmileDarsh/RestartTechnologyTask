@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="sub_action_frame">50dp</dimen>
+    <dimen name="sub_action_image">20dp</dimen>
+</resources>

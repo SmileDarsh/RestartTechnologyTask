@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Task</string>
+    <string name="you_ara_in">You are in</string>
+    <string name="city">Misr Al Gadida - Egypt</string>
+    <string name="view_all">View all</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="bellman">Bellman</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
+    <string name="retry">Retry</string>
+
+    <string name="home_fragment">Home Fragment</string>
+    <string name="search_fragment">Search Fragment</string>
+    <string name="notification_fragment">Notification Fragment</string>
+    <string name="profile_fragment">Profile Fragment</string>
+
+    <string name="hotspots">Hotspots</string>
+    <string name="events">Events</string>
+    <string name="attractions">Attractions</string>
+    <string name="map">Map</string>
+
+    <string name="no_internet">No Internet Connection. Make sure Wi-Fi or Cellular data is turned on , then try again</string>
+
+</resources>
