@@ -10,15 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.restarttech.task.R
 import com.restarttech.task.adapter.HomeAdapter
-import com.restarttech.task.helper.Utils.isNotConnected
 import com.restarttech.task.model.Home
-import com.restarttech.task.remote.RetrofitWebService
-import com.restarttech.task.remote.response.DataResponse
 import com.restarttech.task.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * Created by µðšţãƒâ ™ on 11/4/2019.
@@ -40,6 +34,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         model = ViewModelProvider(this).get(HomeViewModel::class.java)
+        tvCity.text = getString(R.string.city)
 
         val nameObserver = Observer<MutableList<Home>> { list ->
             initRecyclerView(list)
@@ -74,54 +69,6 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = HomeAdapter(list)
         }
-    }
-
-    private fun getDataRetrofit() {
-        hideView()
-        RetrofitWebService.service.getHome().enqueue(object : Callback<DataResponse> {
-            override fun onResponse(call: Call<DataResponse>, response: Response<DataResponse>) {
-                val res = response.body()
-
-                res.let {
-                    model.homeList.value!!.add(
-                        Home(
-                            "Hotspots",
-                            R.drawable.hotspot_icon,
-                            res!!.data.hot_spots
-                        )
-                    )
-                    model.homeList.value!!.add(
-                        Home(
-                            "Events",
-                            R.drawable.events_icon,
-                            res.data.events
-                        )
-                    )
-                    model.homeList.value!!.add(
-                        Home(
-                            "Attractions",
-                            R.drawable.attarctions_icon,
-                            res.data.attractions
-                        )
-                    )
-//                    mList.add(Home("Hotspots",R.drawable.hotspot_icon, res!!.data.hot_spots))
-//                    mList.add(Home("Events",R.drawable.events_icon, res.data.events))
-//                    mList.add(Home("Attractions",R.drawable.attarctions_icon, res.data.attractions))
-
-//                    mAdapter.notifyDataSetChanged()
-                    pbProgress.visibility = View.GONE
-                }
-            }
-
-            override fun onFailure(call: Call<DataResponse>, t: Throwable) {
-                if (isNotConnected(t)) {
-                    showView()
-                }
-                t.printStackTrace()
-                pbProgress.visibility = View.GONE
-            }
-
-        })
     }
 
     private fun hideView() {

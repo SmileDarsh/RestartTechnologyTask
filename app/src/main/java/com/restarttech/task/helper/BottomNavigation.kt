@@ -1,17 +1,18 @@
 package com.restarttech.task.helper
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.view.setMargins
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu
 import com.restarttech.task.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_navigation.*
-
 /**
  * Created by µðšţãƒâ ™ on 11/4/2019.
  * Here i am Create Custom BottomNavigation for this Task
@@ -20,7 +21,8 @@ import kotlinx.android.synthetic.main.bottom_navigation.*
 class BottomNavigation(
     private val mActivity: Activity,
     private val mOnItemClicked: OnBottomNavigationItemClicked
-) {
+)
+    : View.OnClickListener {
 
     private val mNavigationButtons = mutableListOf<ImageButton>()
 
@@ -83,6 +85,11 @@ class BottomNavigation(
             }
 
         })
+
+        actionMenu.subActionItems[0].view.findViewById<LinearLayout>(R.id.llMap).setOnClickListener(this)
+        actionMenu.subActionItems[1].view.findViewById<LinearLayout>(R.id.llAttarctions).setOnClickListener(this)
+        actionMenu.subActionItems[2].view.findViewById<LinearLayout>(R.id.llEvents).setOnClickListener(this)
+        actionMenu.subActionItems[3].view.findViewById<LinearLayout>(R.id.llHotspots).setOnClickListener(this)
     }
 
     /**
@@ -104,5 +111,9 @@ class BottomNavigation(
         imageButtonNotSelected[1].isSelected = false
         imageButtonNotSelected[2].isSelected = false
         imageButtonNotSelected.clear()
+    }
+
+    override fun onClick(v: View?) {
+        mOnItemClicked.onItemClicked(v!!)
     }
 }
